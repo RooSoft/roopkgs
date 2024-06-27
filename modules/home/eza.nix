@@ -1,22 +1,24 @@
-{lib, pkgs, ...}: let
-  cfg = config.eza;
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.roopkgs.home.eza;
 in {
   options = with lib; {
-    eza.enable = mkEnableOption "eza";
+    roopkgs.home.eza.enable = mkEnableOption "eza";
   };
 
-  config = {
-    lib.mkIf cfg.eza.enable {
-      home.shellAliases = {
-        l = "eza -l --git";
-      };
+  config = lib.mkIf cfg.enable {
+    home = {
+      packages = with pkgs; [
+        eza
+      ];
 
-      home = {
-        packages = with pkgs; [
-          eza
-        ];
+      shellAliases = {
+        l = "eza -l --git";
       };
     };
   };
 }
-

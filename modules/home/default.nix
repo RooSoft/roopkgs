@@ -1,3 +1,5 @@
-{...} : {
-  eza = ./modules/eza.nix;
+{...}: {
+  imports = [
+    ./eza.nix
+  ];
 }
