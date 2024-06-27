@@ -1,0 +1,3 @@
+{...} : {
+  eza = ./modules/eza.nix;
+}
