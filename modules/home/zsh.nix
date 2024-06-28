@@ -23,6 +23,10 @@ in {
       autosuggestion = {
         enable = true;
       };
+
+      initExtra = ''
+        source <(fzf --zsh)
+      '';
     };
   };
 }
