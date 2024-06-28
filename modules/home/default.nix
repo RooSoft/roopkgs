@@ -6,5 +6,6 @@
     ./tmux.nix
     ./zellij
     ./starship.nix
+    ./alacritty.nix
   ];
 }
