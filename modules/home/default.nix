@@ -4,5 +4,6 @@
     ./helix
     ./atuin.nix
     ./zellij
+    ./starship.nix
   ];
 }
