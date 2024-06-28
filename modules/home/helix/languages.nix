@@ -23,6 +23,13 @@
         };
         language-servers = ["elixir-ls"];
       }
+
+      {
+        name = "nix";
+        formatter = {
+          command = "alejandra";
+        };
+      }
     ];
   };
 
