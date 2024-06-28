@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   options = with lib; {
     roopkgs.home.helix.enable = mkEnableOption "helix";
   };
@@ -10,7 +14,7 @@
 
   config = {
     home = {
-      packages = [pkgs.helix];
+      packages = with pkgs; [helix alejandra];
     };
   };
 }
