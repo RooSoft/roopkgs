@@ -69,8 +69,6 @@ in {
   config = lib.mkIf cfg.enable {
     home = {
       file.".config/alacritty/alacritty.toml".source = tomlFormat;
-
-      packages = [pkgs.alacritty];
     };
   };
 }
