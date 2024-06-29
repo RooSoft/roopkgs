@@ -26,11 +26,27 @@ roopkgs = {
 };
 ```
 
-#### Add `roopkgs.nixosModules.home` to any computer configuration's `home-manager` imports
+#### Enable for a given computer
 
-#### Enable fully configured applications on said computers, example here with `helix`
+Example: add `roopkgs.nixosModules.home` to `nixos-computer`'s `home-manager` imports
+
+```nix
+"me@nixos-computer" = home-manager.lib.homeManagerConfiguration {
+  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+  extraSpecialArgs = {
+    inherit inputs pkgs;
+  };
+  modules = [
+    roopkgs.nixosModules.home
+    ./machines/nixos-computer/users/me/home.nix];
+  ];
+};
+```
+
+#### Configure applications in the configuration file
+
+Example here with `helix`
 
 ```nix
 roopkgs.home.helix.enable = true;
-
 ```
