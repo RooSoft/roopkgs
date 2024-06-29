@@ -6,6 +6,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # See https://starship.rs/config/
+  
     programs.starship = {
       enable = true;
       enableZshIntegration = true;
