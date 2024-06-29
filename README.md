@@ -15,7 +15,7 @@ Removes some configuration repetition across different computers
 * alacritty
 
 
-## instructions
+## How to use
 
 #### Import this flake
 
