@@ -17,7 +17,7 @@ Removes some configuration repetition across different computers
 
 ## instructions
 
-* Import this flake
+#### Import this flake
 
 ```nix
 roopkgs = {
@@ -26,9 +26,9 @@ roopkgs = {
 };
 ```
 
-* Add `roopkgs.nixosModules.home` to any computer configuration's `home-manager` imports
+#### Add `roopkgs.nixosModules.home` to any computer configuration's `home-manager` imports
 
-* Enable fully configured applications on said computers, example here with `helix`
+#### Enable fully configured applications on said computers, example here with `helix`
 
 ```nix
 roopkgs.home.helix.enable = true;
