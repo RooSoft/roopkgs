@@ -3,6 +3,7 @@
 in {
   imports = [
     ./fzf.nix
+    ./zoxide.nix
   ];
 
   options = with lib; {
@@ -14,6 +15,7 @@ in {
       enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      autosuggestion.enable = true;
 
       shellAliases = {
         ls = "ls --color=auto -F";
@@ -23,18 +25,6 @@ in {
         CLICOLOR = 1;
         EDITOR = "hx";
       };
-
-      autosuggestion = {
-        enable = true;
-      };
-
-      initExtra = ''
-        eval "$(zoxide init zsh)"
-      '';
     };
-
-    home.packages = with pkgs; [
-      zoxide
-    ];
   };
 }
