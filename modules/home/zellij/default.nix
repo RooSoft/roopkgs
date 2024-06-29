@@ -19,6 +19,8 @@ in {
 
       enableZshIntegration = true;
 
+      # See https://zellij.dev/documentation/options
+
       settings = {
         # theme = "tokyo-night-dark";
         theme = "catppuccin-macchiato";
