@@ -1,6 +1,9 @@
 # roopkgs
 
-Removes some configuration repetition across different computers
+Removes some configuration repetition across different computers.
+
+So far only includes home-manager configurations. Eventually will
+include some system applications as well.
 
 
 ## Available configurations for
