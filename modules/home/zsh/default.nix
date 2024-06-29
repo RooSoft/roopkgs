@@ -1,6 +1,10 @@
 {lib, config, pkgs, ...} : let
   cfg = config.roopkgs.home.zsh;
 in {
+  imports = [
+    ./fzf.nix
+  ];
+
   options = with lib; {
     roopkgs.home.zsh.enable = mkEnableOption "zsh";
   };
@@ -25,13 +29,11 @@ in {
       };
 
       initExtra = ''
-        source <(fzf --zsh)
         eval "$(zoxide init zsh)"
       '';
     };
 
     home.packages = with pkgs; [
-      fzf
       zoxide
     ];
   };
