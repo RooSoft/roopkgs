@@ -9,6 +9,8 @@
 
   package = unstable.helix;
 
+  # See https://docs.helix-editor.com/configuration.html
+
   helixConfig = {
     # theme = "jellybeans";
     theme = "catppuccin_macchiato";

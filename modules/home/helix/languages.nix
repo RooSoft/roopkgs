@@ -6,6 +6,8 @@
 }: let
   cfg = config.roopkgs.home.helix;
 
+  # See https://docs.helix-editor.com/configuration.html
+
   languageConfig = {
     language = [
       {
