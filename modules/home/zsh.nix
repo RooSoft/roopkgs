@@ -1,4 +1,4 @@
-{lib, config, ...} : let
+{lib, config, pkgs, ...} : let
   cfg = config.roopkgs.home.zsh;
 in {
   options = with lib; {
@@ -26,7 +26,13 @@ in {
 
       initExtra = ''
         source <(fzf --zsh)
+        eval "$(zoxide init zsh)"
       '';
     };
+
+    home.packages = with pkgs; [
+      fzf
+      zoxide
+    ];
   };
 }
