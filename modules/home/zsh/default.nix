@@ -25,6 +25,13 @@ in {
         CLICOLOR = 1;
         EDITOR = "hx";
       };
+
+      initExtra = ''
+        # see https://superuser.com/a/169930/109556
+        bindkey "\e[3~" delete-char
+        bindkey "\e[F" forward-word
+        bindkey "\e[H" backward-word
+      '';
     };
   };
 }
