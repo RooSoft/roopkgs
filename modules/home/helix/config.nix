@@ -51,5 +51,11 @@
   tomlFormat = (pkgs.formats.toml {}).generate "something" helixConfig;
 in
   lib.mkIf cfg.enable {
-    home.file.".config/helix/config.toml".source = tomlFormat;
+    home = {
+      file.".config/helix/config.toml".source = tomlFormat;
+
+      packages = with pkgs; [
+        lazygit
+      ];
+    };
   }
