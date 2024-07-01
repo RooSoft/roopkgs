@@ -13,10 +13,12 @@ in {
     programs.lazygit = {
       enable = true;
 
+      # See: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
       settings = {
-        
+        gui = {
+          showIcons = true;
+        };
       };
     };
   };
 }
-
