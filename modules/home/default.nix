@@ -3,6 +3,7 @@
     ./zsh
     ./eza.nix
     ./helix
+    ./lazygit.nix
     ./atuin.nix
     ./tmux.nix
     ./zellij
