@@ -10,5 +10,6 @@
     ./starship.nix
     ./alacritty.nix
     ./dust.nix
+    ./bat.nix
   ];
 }
