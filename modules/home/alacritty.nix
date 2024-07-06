@@ -35,6 +35,11 @@
           key = "F12";
           action = "ToggleFullscreen";
         }
+        {
+          key = "Return";
+          mods = "Control|Shift";
+          action = "SpawnNewInstance";
+        }
       ];
     };
 
