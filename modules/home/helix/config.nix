@@ -63,6 +63,9 @@
       packages = with pkgs; [
         # Why marksman: https://www.youtube.com/watch?v=8GQKOLh_V5E
         marksman
+
+        # nix language server
+        nil
       ];
     };
   };
