@@ -6,8 +6,7 @@
   };
 
   outputs = {
-    self,
-    nixpkgs,
+    ...
   }: {
     nixosModules = {
       home = import ./modules/home;

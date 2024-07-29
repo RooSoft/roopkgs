@@ -12,13 +12,13 @@
   config = let
     cfg = config.roopkgs.home.helix;
 
-    package = unstable.helix;
-
     # See https://docs.helix-editor.com/configuration.html
 
     helixConfig = {
       # theme = "jellybeans";
       theme = "catppuccin_macchiato";
+
+      package = unstable.helix;
 
       editor = {
         true-color = true;
