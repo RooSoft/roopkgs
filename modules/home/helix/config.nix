@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  unstable,
   config,
   ...
 }: {
@@ -17,8 +16,6 @@
     helixConfig = {
       # theme = "jellybeans";
       theme = "catppuccin_macchiato";
-
-      package = unstable.helix;
 
       editor = {
         true-color = true;

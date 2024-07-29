@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  unstable,
   ...
 }: {
   options = with lib; {
@@ -14,7 +15,7 @@
 
   config = {
     home = {
-      packages = with pkgs; [helix alejandra];
+      packages = [unstable.helix pkgs.alejandra];
     };
   };
 }
