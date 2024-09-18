@@ -1,22 +1,40 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
-  cfg = config.roopkgs.home.atuin;
+  cfg = config.roopkgs.system.minio;
 in {
   imports = [
     ./kes.nix
   ];
 
   options = with lib; {
-    roopkgs.system.minio.enable = mkEnableOption "minio";
+    roopkgs.system.minio = {
+      enable = mkEnableOption "minio";
+
+      dataPort = mkOption {
+        type = types.port;
+        default = 9000;
+      };
+
+      consolePort = mkOption {
+        type = types.port;
+        default = 9001;
+      };
+
+      workingDirectory = mkOption {
+        type = types.path;
+        default = "/var/lib/minio";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
     networking = {
       firewall = {
-        allowedTCPPorts = [9000 9001];
+        allowedTCPPorts = [cfg.dataPort cfg.consolePort];
       };
     };
 
@@ -25,6 +43,8 @@ in {
     };
 
     systemd.services.minio = {
+      description = "MinIO server";
+      wants = ["network-online.target"];
       after = ["kes.service"];
 
       environment = let
@@ -42,6 +62,27 @@ in {
 
         MINIO_KMS_KES_CAPATH = "${kesConfigFolder}/public.crt";
       };
+
+      serviceConfig = {
+        User = "kes";
+        ExecStart = ''${pkgs.minio}/bin/minio server \
+          --address ":${toString cfg.dataPort}" \
+          --console-address ":${toString cfg.consolePort}"
+        '';
+
+        WorkingDirectory = cfg.workingDirectory;
+        Type = "simple";
+        Restart = "always";
+        TimeoutSec = 120;
+        RestartSec = 30;
+        KillMode = "process";
+
+        PrivateTmp = true;
+        PrivateDevices = true;
+        MemoryDenyWriteExecute = true;
+      };
+
+      wantedBy = ["multi-user.target"];
     };
   };
 }
