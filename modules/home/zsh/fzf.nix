@@ -1,6 +1,11 @@
-{lib, config, pkgs, ...} : let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   zshCfg = config.roopkgs.home.zsh;
-in{
+in {
   # See https://junegunn.github.io/fzf/getting-started/
 
   config = lib.mkIf zshCfg.enable {

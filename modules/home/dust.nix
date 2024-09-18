@@ -23,7 +23,7 @@ in {
       packages = with pkgs; [
         dust
       ];
-      
+
       file.".config/dust/config.toml".source = tomlFormat;
     };
   };

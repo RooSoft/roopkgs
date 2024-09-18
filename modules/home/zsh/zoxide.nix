@@ -1,6 +1,11 @@
-{lib, config, pkgs, ...} : let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   zshCfg = config.roopkgs.home.zsh;
-in{
+in {
   # See https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#configuration
 
   config = lib.mkIf zshCfg.enable {
@@ -15,4 +20,3 @@ in{
     ];
   };
 }
-

@@ -1,4 +1,9 @@
-{lib, config, pkgs, ...} : let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   cfg = config.roopkgs.home.zsh;
 in {
   imports = [

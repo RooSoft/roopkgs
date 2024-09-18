@@ -1,4 +1,8 @@
-{config, lib, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.roopkgs.home.starship;
 in {
   options = with lib; {
@@ -7,7 +11,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     # See https://starship.rs/config/
-  
+
     programs.starship = {
       enable = true;
       enableZshIntegration = true;

@@ -51,19 +51,20 @@
     };
 
     tomlFormat = (pkgs.formats.toml {}).generate "something" helixConfig;
-  in lib.mkIf cfg.enable {
-    roopkgs.home.lazygit.enable = true;
+  in
+    lib.mkIf cfg.enable {
+      roopkgs.home.lazygit.enable = true;
 
-    home = {
-      file.".config/helix/config.toml".source = tomlFormat;
+      home = {
+        file.".config/helix/config.toml".source = tomlFormat;
 
-      packages = with pkgs; [
-        # Why marksman: https://www.youtube.com/watch?v=8GQKOLh_V5E
-        marksman
+        packages = with pkgs; [
+          # Why marksman: https://www.youtube.com/watch?v=8GQKOLh_V5E
+          marksman
 
-        # nix language server
-        nil
-      ];
+          # nix language server
+          nil
+        ];
+      };
     };
-  };
 }

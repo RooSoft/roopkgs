@@ -18,7 +18,7 @@ in {
         bat = "bat --theme='1337' --italic-text=always";
       };
     };
-    
+
     home = {
       packages = with pkgs; [
         bat
@@ -26,4 +26,3 @@ in {
     };
   };
 }
-

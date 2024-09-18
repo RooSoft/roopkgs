@@ -6,7 +6,7 @@
   ...
 }: let
   cfg = config.roopkgs.home.alacritty;
-  
+
   # see https://alacritty.org/config-alacritty.html
   alacrittyConfig = {
     font = {

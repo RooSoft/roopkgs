@@ -1,4 +1,8 @@
-{lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   cfg = config.roopkgs.home.atuin;
 in {
   options = with lib; {
@@ -34,4 +38,3 @@ in {
     };
   };
 }
-
