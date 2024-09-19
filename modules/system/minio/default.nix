@@ -4,10 +4,6 @@
   config,
   ...
 }: {
-  imports = [
-    # ./kes.nix
-  ];
-
   options = with lib; {
     roopkgs.system.minio = mkOption {
       default = {};

@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./kes.nix
     ./minio
   ];
 }
