@@ -44,8 +44,7 @@
           allowedTCPPorts = [cfg.listenPort cfg.consolePort];
         };
       })
-      config.roopkgs.system.minio;
-    # filteredCfgs;
+      filteredCfgs;
 
     users.groups.minio = {};
 
@@ -65,7 +64,7 @@
             "d ${cfg.workingDirectory}/data 750 minio minio"
           ];
         })
-        config.roopkgs.system.minio;
+        filteredCfgs;
 
       services =
         lib.attrsets.mapAttrs' (name: cfg: {
@@ -110,7 +109,7 @@
             wantedBy = ["multi-user.target"];
           };
         })
-        config.roopkgs.system.minio;
+        filteredCfgs;
       };
   };
 }
