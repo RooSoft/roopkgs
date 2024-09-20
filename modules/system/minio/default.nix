@@ -59,7 +59,7 @@
     };
 
     systemd = {
-      tmpfiles = 
+      tmpfiles =
         lib.attrsets.mapAttrs' (name: cfg: {
           name = "rules";
           value = [
@@ -113,6 +113,6 @@
           };
         })
         filteredCfgs;
-      };
+    };
   };
 }
