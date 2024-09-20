@@ -51,12 +51,22 @@
       })
       filteredCfgs;
 
-    users.groups.minio = {};
+    users = {
+      groups = lib.attrsets.mapAttrs' (name: cfg: {
+        name = "minio-${name}";
+        value = {};
+      })
+      filteredCfgs;
 
-    users.users.minio = {
-      isSystemUser = true;
-      extraGroups = ["kes"];
-      group = "minio";
+      users = lib.attrsets.mapAttrs' (name: cfg: {
+        name = "minio-${name}";
+        value = {
+          isSystemUser = true;
+          extraGroups = ["kes"];
+          group = "minio-${name}";
+        };
+      })
+      filteredCfgs;
     };
 
     systemd = {
@@ -64,9 +74,9 @@
         lib.attrsets.mapAttrs' (name: cfg: {
           name = "rules";
           value = [
-            "d ${cfg.workingDirectory} 750 minio minio"
-            "d ${cfg.workingDirectory}/config 750 minio minio"
-            "d ${cfg.workingDirectory}/data 750 minio minio"
+            "d ${cfg.workingDirectory} 750 minio-${name} minio-${name}"
+            "d ${cfg.workingDirectory}/config 750 minio-${name} minio-${name}"
+            "d ${cfg.workingDirectory}/data 750 minio-${name} minio-${name}"
           ];
         })
         filteredCfgs;
@@ -95,7 +105,7 @@
             };
 
             serviceConfig = {
-              User = "minio";
+              User = "minio-${name}";
               ExecStart = ''${cfg.package}/bin/minio server data --address ":${toString cfg.listenPort}" --console-address ":${toString cfg.consolePort}"'';
 
               WorkingDirectory = cfg.workingDirectory;
