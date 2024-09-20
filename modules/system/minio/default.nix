@@ -11,7 +11,7 @@
         options = {
           enable = mkEnableOption "minio";
 
-          package = mkPackageOption pkgs "minio" { };
+          package = mkPackageOption pkgs "minio" {};
 
           listenPort = mkOption {
             type = types.port;
@@ -52,21 +52,23 @@
       filteredCfgs;
 
     users = {
-      groups = lib.attrsets.mapAttrs' (name: cfg: {
-        name = "minio-${name}";
-        value = {};
-      })
-      filteredCfgs;
+      groups =
+        lib.attrsets.mapAttrs' (name: cfg: {
+          name = "minio-${name}";
+          value = {};
+        })
+        filteredCfgs;
 
-      users = lib.attrsets.mapAttrs' (name: cfg: {
-        name = "minio-${name}";
-        value = {
-          isSystemUser = true;
-          extraGroups = ["kes"];
-          group = "minio-${name}";
-        };
-      })
-      filteredCfgs;
+      users =
+        lib.attrsets.mapAttrs' (name: cfg: {
+          name = "minio-${name}";
+          value = {
+            isSystemUser = true;
+            extraGroups = ["kes"];
+            group = "minio-${name}";
+          };
+        })
+        filteredCfgs;
     };
 
     systemd = {
