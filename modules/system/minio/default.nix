@@ -25,6 +25,14 @@
             type = types.path;
             default = "/var/lib/minio";
           };
+
+          kesCrtFile = mkOption {
+            type = types.path;
+          };
+
+          kesKeyFile = mkOption {
+            type = types.path;
+          };
         };
       });
     };
@@ -72,14 +80,13 @@
 
             environment = let
               kesConfigFolder = "/var/lib/kes";
-              caFolder = "/var/lib/minio/config/CAs";
             in {
               SSL_CERT_DIR = kesConfigFolder;
 
               MINIO_KMS_KES_ENDPOINT = "https://127.0.0.1:7373";
 
-              MINIO_KMS_KES_CERT_FILE = "${caFolder}/kes.crt";
-              MINIO_KMS_KES_KEY_FILE = "${caFolder}/kes.key";
+              MINIO_KMS_KES_CERT_FILE = cfg.kesCrtFile;
+              MINIO_KMS_KES_KEY_FILE = cfg.kesKeyFile;
 
               MINIO_KMS_KES_KEY_NAME = "minio";
 
