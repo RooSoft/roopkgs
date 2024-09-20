@@ -11,6 +11,8 @@
         options = {
           enable = mkEnableOption "minio";
 
+          package = mkPackageOption pkgs "minio" { };
+
           listenPort = mkOption {
             type = types.port;
             default = 9000;
@@ -94,7 +96,7 @@
 
             serviceConfig = {
               User = "minio";
-              ExecStart = ''${pkgs.minio}/bin/minio server data --address ":${toString cfg.listenPort}" --console-address ":${toString cfg.consolePort}"'';
+              ExecStart = ''${cfg.package}/bin/minio server data --address ":${toString cfg.listenPort}" --console-address ":${toString cfg.consolePort}"'';
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
