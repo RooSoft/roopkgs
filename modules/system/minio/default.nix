@@ -23,7 +23,6 @@
 
           workingDirectory = mkOption {
             type = types.path;
-            default = "/var/lib/minio";
           };
 
           kesCrtFile = mkOption {
