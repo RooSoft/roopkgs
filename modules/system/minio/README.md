@@ -85,3 +85,52 @@ The system key comes from `/etc/ssh/ssh_host_ed25519_key.pub`. Tells agenix that
 ed25519 key can be used to encrypt and decrypt the underlying secrets.
 
 Now run `./edit-kes.private.key.sh` and paste the `private.key` file contents created earlier.
+
+#### Configure KES on the host
+
+In a module under the host's configuration file, add `agenix.nixosModules.default` to the imports
+array.
+
+Then, create an agenix section refering to the variables created above
+
+```nix
+  age = {
+    secrets = {
+      publicCrt = {
+        file = config.kesPublicCrtFile;
+        path = "/var/lib/kes/public.crt";
+        mode = "440";
+        owner = "kes";
+        group = "kes";
+      };
+
+      privateKey = {
+        file = config.kesPrivateKeyFile;
+        owner = "kes";
+        group = "kes";
+      };
+    };
+  };
+```
+
+Here, the public certificate will end up being written in the `/var/lib/kes/public.crt` file, while
+the private key doesn't really need to be accessed outside this configuration file. It thus doesn't
+have to get a recognizable path.
+
+All that's left is to configure a `KES` instande from roopkgs
+
+```nix
+  roopkgs.system = {
+    kes = {
+      enable = true;
+
+      publicCrt = config.age.secrets.publicCrt.path;
+      privateKey = config.age.secrets.privateKey.path;
+
+      adminIdentity = "901b125bf3c2e7b16423cfee6825c3c5efacbb642bb04a95ee39bfa61480c112";
+    };
+  };
+```
+
+Now let's talk about the `adminIdentity` value here.
+
