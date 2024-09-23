@@ -194,6 +194,17 @@ In the `flake.nix`, update the keys module
   })
 ```
 
+Make sure these options are added to the host configuration file, so they match the configuration above:
+
+```nix
+    minioClientCrtFile = mkOption {
+      type = types.path;
+    };
+    minioClientKeyFile = mkOption {
+      type = types.path;
+    };
+```
+
 Now, we need a MinIO configuration file that will contain
 
 ```nix
