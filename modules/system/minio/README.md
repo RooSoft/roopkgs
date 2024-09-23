@@ -30,3 +30,32 @@ Then, if you want to create a local host certificate:
 ```bash
 certgen -host "127.0.0.1,localhost"
 ```
+
+#### Server configuration
+
+In the `flake.nix` file make sure `agenix` is part of the inputs
+
+```nix
+  agenix = {
+    url = "github:ryantm/agenix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+```
+
+Add agenix into the machine's `special args`
+
+```nix
+specialArgs = {inherit self agenix;};
+```
+
+Add this section to the machine's modules array:
+
+```nix
+  ({...}: {
+    kesPublicCrtFile = ./secrets/kes.public.crt.age;
+    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+
+    minioKesCrtFile = ./secrets/minio.kes.crt.age;
+    minioKesKeyFile = ./secrets/minio.kes.key.age;
+  })
+```
