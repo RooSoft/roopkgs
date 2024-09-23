@@ -33,8 +33,6 @@ certgen -host "127.0.0.1,localhost"
 
 #### Server configuration
 
-First, make sure the `agenix` package is installed on the host.
-
 In the `flake.nix` file make sure `agenix` and `roopkgs` are part of the inputs
 
 ```nix
@@ -62,6 +60,11 @@ Add this section to the machine's modules array:
     kesPrivateKeyFile = ./secrets/kes.private.key.age;
   })
 ```
+
+Also, make sure `agenix.packages.x86_64-linux.agenix` is installed on the host machine
+through the `configuration.nix` file. The agenix variable should be available from there
+since it's included in the `specialArgs`.
+
 
 #### Create `public.crt` and `private.key` secrets
 
