@@ -33,6 +33,8 @@ certgen -host "127.0.0.1,localhost"
 
 #### Server configuration
 
+First, make sure the `agenix` package is installed on the host.
+
 In the `flake.nix` file make sure `agenix` and `roopkgs` are part of the inputs
 
 ```nix
