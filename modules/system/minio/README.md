@@ -153,6 +153,14 @@ Extract this new identity and put it in the above nix config under `roopkgs.syst
 kes identity of client.crt
 ```
 
+From that point on, the system should be able to be updated with `nixos-rebuild switch` and have KES installed.
+
+```bash
+journalctl -u kes
+````
+
+To check if everything is ok
+
 
 ### MinIO configuration
 
@@ -163,13 +171,15 @@ We won't discuss how to do it, as it's the same as for KES keys. Here is what th
 might end up looking like...
 
 ```nix
-  ({...}: {
-    kesPublicCrtFile = ./secrets/kes.public.crt.age;
-    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+let
+  system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNqpcHLS2Ip1Cdz53LuMF/znGtsLWeA4vr3WLETb9sZ";
+in {
+  "kes.public.crt.age".publicKeys = [system];
+  "kes.private.key.age".publicKeys = [system];
 
-    minioClientCrtFile = ./secrets/minio.client.crt.age;
-    minioClientKeyFile = ./secrets/minio.client.key.age;
-  })
+  "minio.client.crt.age".publicKeys = [system];
+  "minio.client.key.age".publicKeys = [system];
+}
 ```
 
 In the `flake.nix`, update the keys module
