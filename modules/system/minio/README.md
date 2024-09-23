@@ -54,9 +54,6 @@ Add this section to the machine's modules array:
   ({...}: {
     kesPublicCrtFile = ./secrets/kes.public.crt.age;
     kesPrivateKeyFile = ./secrets/kes.private.key.age;
-
-    minioKesCrtFile = ./secrets/minio.kes.crt.age;
-    minioKesKeyFile = ./secrets/minio.kes.key.age;
   })
 ```
 
@@ -144,4 +141,97 @@ Extract this new identity and put it in the above nix config under `roopkgs.syst
 
 ```bash
 kes identity of client.crt
+```
+
+
+### MinIO configuration
+
+Now that we've got the `client.crt` and `client.key` files, let's create secrets for them in the same way
+that's been done for KES.
+
+We won't discuss how to do it, as it's the same as for KES keys. Here is what the new `secrets.nix` file 
+might end up looking like...
+
+```nix
+  ({...}: {
+    kesPublicCrtFile = ./secrets/kes.public.crt.age;
+    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+
+    minioClientCrtFile = ./secrets/minio.client.crt.age;
+    minioClientKeyFile = ./secrets/minio.client.key.age;
+  })
+```
+
+In the `flake.nix`, update the keys module
+
+```nix
+  ({...}: {
+    kesPublicCrtFile = ./secrets/kes.public.crt.age;
+    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+
+    minioClientCrtFile = ./secrets/minio.client.crt.age;
+    minioClientKeyFile = ./secrets/minio.client.key.age;
+  })
+```
+
+Now, we need a MinIO configuration file that will contain
+
+```nix
+  age = {
+    secrets = {
+      clientCrt = {
+        file = config.minioClientCrtFile;
+        path = "/var/lib/kes/client.crt";
+        mode = "440";
+        owner = "kes";
+        group = "kes";
+      };
+
+      clientKey = {
+        file = config.minioClientKeyFile;
+        path = "/var/lib/kes/client.key";
+        mode = "440";
+        owner = "kes";
+        group = "kes";
+      };
+    };
+  };
+```
+
+And here is a special case of a system containing two MinIO instances named `minio@one` and `minio@two`
+
+```nix
+  roopkgs.system = {
+    minio = {
+      one = {
+        enable = true;
+
+        package = pkgs_unstable.minio;
+
+        listenPort = oneListenPort;
+        consolePort = oneConsolePort;
+
+        workingDirectory = "/var/lib/minio-one";
+
+        # same as two
+        kesCrtFile = config.age.secrets.clientCrt.path;
+        kesKeyFile = config.age.secrets.clientKey.path;
+      };
+
+      two = {
+        enable = true;
+
+        package = pkgs_unstable.minio;
+
+        listenPort = twoListenPort;
+        consolePort = twoConsolePort;
+
+        workingDirectory = "/var/lib/minio-two";
+
+        # same as one
+        kesCrtFile = config.age.secrets.clientCrt.path;
+        kesKeyFile = config.age.secrets.clientKey.path;
+      };
+    };
+  };
 ```
