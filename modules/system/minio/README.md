@@ -132,5 +132,16 @@ All that's left is to configure a `KES` instande from roopkgs
   };
 ```
 
-Now let's talk about the `adminIdentity` value here.
+Now let's talk about the `adminIdentity` value here. Create client crential files:
 
+```bash
+certgen -client -host "localhost"
+```
+
+The `client.crt` and `client.key` files will be useful to connect MinIO to the KES certificate autorithy
+
+Extract this new identity and put it in the above nix config under `roopkgs.system.kes.aminIdentity`
+
+```bash
+kes identity of client.crt
+```
