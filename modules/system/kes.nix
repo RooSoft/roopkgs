@@ -122,14 +122,6 @@ in {
         wants = ["network-online.target"];
         after = ["network-online.target"];
 
-        # environment = {
-        #   SSL_CERT_DIR = cfg.configFolder;
-
-        #   KES_SERVER = "https://127.0.0.1:7373";
-        #   KES_CLIENT_CERT = "${cfg.configFolder}/client.crt";
-        #   KES_CLIENT_KEY = "${cfg.configFolder}/client.key";
-        # };
-
         serviceConfig = {
           User = "kes";
           ExecStart = "${kes}/bin/kes server --config ${kesCfgFile}";
