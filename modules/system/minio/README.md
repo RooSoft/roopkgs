@@ -33,12 +33,16 @@ certgen -host "127.0.0.1,localhost"
 
 #### Server configuration
 
-In the `flake.nix` file make sure `agenix` is part of the inputs
+In the `flake.nix` file make sure `agenix` and `roopkgs` are part of the inputs
 
 ```nix
   agenix = {
     url = "github:ryantm/agenix";
     inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  roopkgs = {
+    url = "github:RooSoft/roopkgs";
   };
 ```
 
