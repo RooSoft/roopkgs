@@ -138,7 +138,8 @@ All that's left is to configure a `KES` instande from roopkgs
   };
 ```
 
-Now let's talk about the `adminIdentity` value here. Create client crential files:
+Now let's talk about the `adminIdentity` value here. Next to the `private.key` and `public.crt` files,
+create client crential files:
 
 ```bash
 certgen -client -host "localhost"
