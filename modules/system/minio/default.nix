@@ -33,6 +33,7 @@
 
           kesPort = mkOption {
             type = types.port;
+            default = 7373;
           };
 
           clientCrtFile = mkOption {
