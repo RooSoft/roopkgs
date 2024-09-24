@@ -27,11 +27,11 @@
             type = types.path;
           };
 
-          kesCrtFile = mkOption {
+          clientCrtFile = mkOption {
             type = types.path;
           };
 
-          kesKeyFile = mkOption {
+          clientKeyFile = mkOption {
             type = types.path;
           };
         };
@@ -98,8 +98,8 @@
 
               MINIO_KMS_KES_ENDPOINT = "https://127.0.0.1:7373";
 
-              MINIO_KMS_KES_CERT_FILE = cfg.kesCrtFile;
-              MINIO_KMS_KES_KEY_FILE = cfg.kesKeyFile;
+              MINIO_KMS_KES_CERT_FILE = cfg.clientCrtFile;
+              MINIO_KMS_KES_KEY_FILE = cfg.clientKeyFile;
 
               MINIO_KMS_KES_KEY_NAME = "minio";
 

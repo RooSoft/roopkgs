@@ -245,8 +245,8 @@ And here is a special case of a system containing two MinIO instances named `min
         workingDirectory = "/var/lib/minio-one";
 
         # same as two
-        kesCrtFile = config.age.secrets.clientCrt.path;
-        kesKeyFile = config.age.secrets.clientKey.path;
+        clientCrtFile = config.age.secrets.clientCrt.path;
+        clientKeyFile = config.age.secrets.clientKey.path;
       };
 
       two = {
@@ -260,8 +260,8 @@ And here is a special case of a system containing two MinIO instances named `min
         workingDirectory = "/var/lib/minio-two";
 
         # same as one
-        kesCrtFile = config.age.secrets.clientCrt.path;
-        kesKeyFile = config.age.secrets.clientKey.path;
+        clientCrtFile = config.age.secrets.clientCrt.path;
+        clientKeyFile = config.age.secrets.clientKey.path;
       };
     };
   };
