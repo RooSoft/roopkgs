@@ -27,6 +27,14 @@
             type = types.path;
           };
 
+          kesHost = mkOption {
+            type = types.str;
+          };
+
+          kesPort = mkOption {
+            type = types.port;
+          };
+
           clientCrtFile = mkOption {
             type = types.path;
           };
@@ -96,7 +104,7 @@
             in {
               SSL_CERT_DIR = kesConfigFolder;
 
-              MINIO_KMS_KES_ENDPOINT = "https://127.0.0.1:7373";
+              MINIO_KMS_KES_ENDPOINT = "https://${cfg.kesHost}:${toString cfg.kesPort}";
 
               MINIO_KMS_KES_CERT_FILE = cfg.clientCrtFile;
               MINIO_KMS_KES_KEY_FILE = cfg.clientKeyFile;
