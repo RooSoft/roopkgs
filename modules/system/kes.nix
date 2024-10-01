@@ -117,7 +117,7 @@ in {
         type = types.str;
       };
 
-      valutAppId = mkOption {
+      vaultAppId = mkOption {
         type = types.str;
       };
 
