@@ -45,9 +45,42 @@
       auth = "off";
     };
 
+    policy = {
+      
+      minio = {
+        
+        allow = [
+          "/v1/key/create/*"   
+          "/v1/key/generate/*"
+          "/v1/key/decrypt/*"
+        ];
+
+        identities = [
+          cfg.adminIdentity
+        ];
+      };
+    };
+
+    # keystore = {
+    #   fs = {
+    #     path = "./keys";
+    #   };
+    # };
+
     keystore = {
-      fs = {
-        path = "./keys";
+      vault = {
+        endpoint = cfg.vaultEndpoint;
+        engine = "kv/";
+        version = "v2";
+        approle = {
+          id = cfg.vaultAppId;
+          secret = cfg.vaultAppSecret;
+          retry = "15s";
+        };
+
+        status ={
+          ping = "10s";
+        };
       };
     };
   };
@@ -77,6 +110,18 @@ in {
       };
 
       adminIdentity = mkOption {
+        type = types.str;
+      };
+
+      vaultEndpoint = mkOption {
+        type = types.str;
+      };
+
+      valutAppId = mkOption {
+        type = types.str;
+      };
+
+      vaultAppSecret = mkOption {
         type = types.str;
       };
     };
