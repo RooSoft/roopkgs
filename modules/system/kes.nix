@@ -35,8 +35,9 @@
 
   kesConfig = {
     address = "0.0.0.0:7373";
+
     admin = {
-      identity = cfg.adminIdentity;
+      identity = "disabled"; # cfg.adminIdentity;
     };
 
     tls = {
