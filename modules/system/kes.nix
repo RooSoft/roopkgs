@@ -72,7 +72,7 @@
       vault = {
         endpoint = cfg.vaultEndpoint;
         engine = "kv/";
-        version = "v2";
+        version = "v1";
         approle = {
           id = cfg.vaultAppId;
           secret = cfg.vaultAppSecret;
