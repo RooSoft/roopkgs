@@ -54,7 +54,7 @@
           "/v1/key/create/*"   
           "/v1/key/generate/*"
           "/v1/key/decrypt/*"
-          "/v1/key/bulk/decrypt
+          "/v1/key/bulk/decrypt"
           "/v1/key/list"
           "/v1/status"
           "/v1/metrics"
