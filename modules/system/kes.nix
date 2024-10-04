@@ -56,9 +56,7 @@
           "/v1/key/decrypt/*"
         ];
 
-        identities = [
-          cfg.adminIdentity
-        ];
+        identities = cfg.identities;
       };
     };
 
@@ -110,8 +108,8 @@ in {
         default = "/var/lib/kes";
       };
 
-      adminIdentity = mkOption {
-        type = types.str;
+      identities = mkOption {
+        type = types.listOf types.str;
       };
 
       vaultEndpoint = mkOption {
