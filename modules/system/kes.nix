@@ -54,6 +54,12 @@
           "/v1/key/create/*"   
           "/v1/key/generate/*"
           "/v1/key/decrypt/*"
+          "/v1/key/bulk/decrypt"
+          "/v1/key/list"
+          "/v1/status"
+          "/v1/metrics"
+          "/v1/log/audit"
+          "/v1/log/error"
         ];
 
         identities = cfg.identities;
