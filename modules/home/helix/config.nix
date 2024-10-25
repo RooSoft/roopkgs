@@ -65,6 +65,8 @@
           # Why marksman: https://www.youtube.com/watch?v=8GQKOLh_V5E
           marksman
 
+          markdown-oxide
+
           # nix language server
           nil
         ];
