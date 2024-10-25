@@ -67,6 +67,7 @@
           marksman
 
           unstable.markdown-oxide
+          unstable.dprint
 
           # nix language server
           nil

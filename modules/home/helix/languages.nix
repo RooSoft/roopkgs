@@ -32,6 +32,14 @@
           command = "alejandra";
         };
       }
+
+      {
+        name = "markdown";
+        formatter = { 
+          command = "dprint";
+          args = ["fmt" "--stdin" "md"];
+        };
+      }
     ];
   };
 
