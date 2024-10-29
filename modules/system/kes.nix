@@ -5,7 +5,7 @@
   ...
 }: let
   pname = "kes";
-  version = "2024-06-17T15-47-05Z";
+  version = "2024-09-11T07-22-50Z";
 
   uid = 900;
   gid = 900;
