@@ -34,7 +34,7 @@
   yamlFormat = pkgs.formats.yaml {};
 
   kesConfig = {
-    address = "0.0.0.0:7373";
+    address = cfg.address;
 
     admin = {
       identity = "disabled"; # cfg.adminIdentity;
@@ -65,12 +65,6 @@
         identities = cfg.identities;
       };
     };
-
-    # keystore = {
-    #   fs = {
-    #     path = "./keys";
-    #   };
-    # };
 
     keystore = {
       vault = {
@@ -112,6 +106,11 @@ in {
       configFolder = mkOption {
         type = types.path;
         default = "/var/lib/kes";
+      };
+
+      address = mkOption {
+        type = types.str;
+        default = "0.0.0.0:7373";
       };
 
       identities = mkOption {
