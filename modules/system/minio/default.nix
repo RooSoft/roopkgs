@@ -27,12 +27,8 @@
             type = types.path;
           };
 
-          rootUser = mkOption {
-            type = types.str;
-          };
-
-          rootPassword = mkOption {
-            type = types.str;
+          envFile = mkOption {
+            type = types.path;
           };
 
           kes = mkOption {
@@ -124,9 +120,6 @@
             in {
               SSL_CERT_DIR = kesConfigFolder;
 
-              MINIO_ROOT_USER = cfg.rootUser;
-              MINIO_ROOT_PASSWORD = cfg.rootPassword;
-
               MINIO_KMS_KES_ENDPOINT = "https://${cfg.kes.host}:${toString cfg.kes.port}";
 
               MINIO_KMS_KES_CERT_FILE = cfg.clientCrtFile;
@@ -140,6 +133,8 @@
             serviceConfig = {
               User = "minio-${name}";
               ExecStart = ''${cfg.package}/bin/minio server data --address ":${toString cfg.listenPort}" --console-address ":${toString cfg.consolePort}"'';
+
+              EnvironmentFile = cfg.envFile;
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
