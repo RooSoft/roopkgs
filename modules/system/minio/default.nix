@@ -27,6 +27,14 @@
             type = types.path;
           };
 
+          rootUser = mkOption {
+            type = types.str;
+          };
+
+          rootPassword = mkOption {
+            type = types.str;
+          };
+
           kes = mkOption {
             default = {};
             type = types.submodule {
@@ -115,6 +123,9 @@
               kesConfigFolder = "/var/lib/kes";
             in {
               SSL_CERT_DIR = kesConfigFolder;
+
+              MINIO_ROOT_USER = cfg.rootUser;
+              MINIO_ROOT_PASSWORD = cfg.rootPassword;
 
               MINIO_KMS_KES_ENDPOINT = "https://${cfg.kes.host}:${toString cfg.kes.port}";
 
