@@ -56,8 +56,8 @@ Add this section to the machine's modules array:
 
 ```nix
   ({...}: {
-    kesPublicCrtFile = ./secrets/kes.public.crt.age;
-    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+    publicCrtFile = ./secrets/kes.public.crt.age;
+    privateKeyFile = ./secrets/kes.private.key.age;
   })
 ```
 
@@ -103,7 +103,7 @@ Then, create an agenix section refering to the variables created above
   age = {
     secrets = {
       publicCrt = {
-        file = config.kesPublicCrtFile;
+        file = config.publicCrtFile;
         path = "/var/lib/kes/public.crt";
         mode = "440";
         owner = "kes";
@@ -111,7 +111,7 @@ Then, create an agenix section refering to the variables created above
       };
 
       privateKey = {
-        file = config.kesPrivateKeyFile;
+        file = config.privateKeyFile;
         owner = "kes";
         group = "kes";
       };
@@ -133,12 +133,14 @@ All that's left is to configure a `KES` instande from roopkgs
       publicCrt = config.age.secrets.publicCrt.path;
       privateKey = config.age.secrets.privateKey.path;
 
-      adminIdentity = "901b125bf3c2e7b16423cfee6825c3c5efacbb642bb04a95ee39bfa61480c112";
+      identities = [
+        "901b125bf3c2e7b16423cfee6825c3c5efacbb642bb04a95ee39bfa61480c112"
+      ];
     };
   };
 ```
 
-Now let's talk about the `adminIdentity` value here. Next to the `private.key` and `public.crt` files,
+Now let's talk about the `identities` value here. Next to the `private.key` and `public.crt` files,
 create client crential files:
 
 ```bash
@@ -147,7 +149,7 @@ certgen -client -host "localhost"
 
 The `client.crt` and `client.key` files will be useful to connect MinIO to the KES certificate autorithy
 
-Extract this new identity and put it in the above nix config under `roopkgs.system.kes.aminIdentity`
+Extract this new identity and put it in the above nix config under `roopkgs.system.kes.identities`
 
 ```bash
 kes identity of client.crt
@@ -182,25 +184,26 @@ in {
 }
 ```
 
-In the `flake.nix`, update the keys module
+In the `minio` section of the `flake.nix`, make sur to refer to those keys
 
 ```nix
   ({...}: {
-    kesPublicCrtFile = ./secrets/kes.public.crt.age;
-    kesPrivateKeyFile = ./secrets/kes.private.key.age;
+    kes = {
+      publicCrtFile = ./secrets/kes.public.crt.age;
+    }; 
 
-    minioClientCrtFile = ./secrets/minio.client.crt.age;
-    minioClientKeyFile = ./secrets/minio.client.key.age;
+    clientCrtFile = ./secrets/minio.client.crt.age;
+    clientKeyFile = ./secrets/minio.client.key.age;
   })
 ```
 
 Make sure these options are added to the host configuration file, so they match the configuration above:
 
 ```nix
-    minioClientCrtFile = mkOption {
+    clientCrtFile = mkOption {
       type = types.path;
     };
-    minioClientKeyFile = mkOption {
+    clientKeyFile = mkOption {
       type = types.path;
     };
 ```
@@ -211,7 +214,7 @@ Now, we need a MinIO configuration file that will contain
   age = {
     secrets = {
       clientCrt = {
-        file = config.minioClientCrtFile;
+        file = config.clientCrtFile;
         path = "/var/lib/kes/client.crt";
         mode = "440";
         owner = "kes";
@@ -219,7 +222,7 @@ Now, we need a MinIO configuration file that will contain
       };
 
       clientKey = {
-        file = config.minioClientKeyFile;
+        file = config.clientKeyFile;
         path = "/var/lib/kes/client.key";
         mode = "440";
         owner = "kes";
