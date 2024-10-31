@@ -27,13 +27,24 @@
             type = types.path;
           };
 
-          kesHost = mkOption {
-            type = types.str;
-          };
+          kes = mkOption {
+            default = {};
+            type = types.submodule {
+              options = {
+                host = mkOption {
+                  type = types.str;
+                };
 
-          kesPort = mkOption {
-            type = types.port;
-            default = 7373;
+                port = mkOption {
+                  type = types.port;
+                  default = 7373;
+                };
+
+                keyName = mkOption {
+                  type = types.str;
+                };
+              };
+            };
           };
 
           clientCrtFile = mkOption {
@@ -105,12 +116,12 @@
             in {
               SSL_CERT_DIR = kesConfigFolder;
 
-              MINIO_KMS_KES_ENDPOINT = "https://${cfg.kesHost}:${toString cfg.kesPort}";
+              MINIO_KMS_KES_ENDPOINT = "https://${cfg.kes.host}:${toString cfg.kes.port}";
 
               MINIO_KMS_KES_CERT_FILE = cfg.clientCrtFile;
               MINIO_KMS_KES_KEY_FILE = cfg.clientKeyFile;
-
-              MINIO_KMS_KES_KEY_NAME = "minio-backend-default-key";
+              
+              MINIO_KMS_KES_KEY_NAME = cfg.kes.keyName;
 
               MINIO_KMS_KES_CAPATH = "${kesConfigFolder}/public.crt";
             };
