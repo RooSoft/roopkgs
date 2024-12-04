@@ -72,7 +72,36 @@
         filteredCfgs;
 
       services =
-        lib.attrsets.mapAttrs' (name: cfg: {
+        lib.attrsets.mapAttrs' (name: cfg: let
+
+          configFile = pkgs.writeText "config.json" 
+          ''
+            alias=${cfg.name}
+            rgb=${cfg.rgb}
+
+            network=${cfg.network}
+            log-file=${cfg.workingDirectory}/lightning.log
+            log-level=debug
+
+            fee-base=1000
+            fee-per-satoshi=10
+            min-capacity-sat=1000000
+
+            large-channels
+            funding-confirms=2
+            # autocleaninvoice-cycle=86400
+            # autocleaninvoice-expired-by=86400
+
+            bind-addr=0.0.0.0:${cfg.port}
+
+            bitcoin-cli=/run/current-system/sw/bin/bitcoin-cli
+            bitcoin-rpcconnect=bitcoin-signet
+            bitcoin-rpcport=38332
+            bitcoin-rpcuser=lightning
+            bitcoin-rpcpassword=7fM3AEwFw-5iP7LQ917q-__4AKK9DWTwh3hpNIQjTAw
+          '';
+  
+        in {
           name = "lightning@${name}";
           value = {
             description = "${name} Core Lightning server";
@@ -80,7 +109,7 @@
 
             serviceConfig = {
               User = "lightning-${name}";
-              ExecStart = ''${cfg.package}/bin/lightningd --lightning-dir ${cfg.workingDirectory}'';
+              ExecStart = ''${cfg.package}/bin/lightningd --config ${configFile} --lightning-dir ${cfg.workingDirectory}'';
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
