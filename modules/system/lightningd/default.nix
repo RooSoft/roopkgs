@@ -76,7 +76,7 @@
 
           configFile = pkgs.writeText "config.json" 
           ''
-            alias=${cfg.name}
+            alias=${name}
             rgb=${cfg.rgb}
 
             network=${cfg.network}
