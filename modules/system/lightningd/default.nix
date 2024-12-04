@@ -92,7 +92,7 @@
             # autocleaninvoice-cycle=86400
             # autocleaninvoice-expired-by=86400
 
-            bind-addr=0.0.0.0:${cfg.port}
+            bind-addr=0.0.0.0:${toString cfg.port}
 
             bitcoin-cli=/run/current-system/sw/bin/bitcoin-cli
             bitcoin-rpcconnect=bitcoin-signet
