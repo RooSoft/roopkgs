@@ -109,7 +109,7 @@
 
             serviceConfig = {
               User = "lightning-${name}";
-              ExecStart = ''${cfg.package}/bin/lightningd --config ${configFile} --lightning-dir ${cfg.workingDirectory}'';
+              ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory}'';
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
