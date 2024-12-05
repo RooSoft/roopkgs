@@ -80,7 +80,7 @@
             rgb=${cfg.rgb}
 
             network=${cfg.network}
-            log-file=${cfg.workingDirectory}/lightning.log
+            # log-file=${cfg.workingDirectory}/lightning.log
             log-level=debug
 
             fee-base=1000
