@@ -35,7 +35,7 @@
 
       {
         name = "markdown";
-        formatter = { 
+        formatter = {
           command = "dprint";
           args = ["fmt" "--stdin" "md"];
         };

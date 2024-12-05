@@ -124,7 +124,7 @@
 
               MINIO_KMS_KES_CERT_FILE = cfg.clientCrtFile;
               MINIO_KMS_KES_KEY_FILE = cfg.clientKeyFile;
-              
+
               MINIO_KMS_KES_KEY_NAME = cfg.kes.keyName;
 
               MINIO_KMS_KES_CAPATH = "${kesConfigFolder}/public.crt";

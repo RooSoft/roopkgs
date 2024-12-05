@@ -49,7 +49,7 @@
           C-l = [":new" ":insert-output lazygit" ":buffer-close" ":redraw"];
         };
         insert = {
-          j = { k = "normal_mode"; };
+          j = {k = "normal_mode";};
         };
       };
     };

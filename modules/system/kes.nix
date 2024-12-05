@@ -47,11 +47,9 @@
     };
 
     policy = {
-      
       minio = {
-        
         allow = [
-          "/v1/key/create/*"   
+          "/v1/key/create/*"
           "/v1/key/generate/*"
           "/v1/key/decrypt/*"
           "/v1/key/bulk/decrypt"
@@ -77,7 +75,7 @@
           retry = "15s";
         };
 
-        status ={
+        status = {
           ping = "10s";
         };
       };

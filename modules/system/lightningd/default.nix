@@ -5,7 +5,7 @@
   ...
 }: {
   options = with lib; {
-    roopkgs.system.lightningd= mkOption {
+    roopkgs.system.lightningd = mkOption {
       default = {};
       type = types.attrsOf (types.submodule {
         options = {
@@ -73,34 +73,33 @@
 
       services =
         lib.attrsets.mapAttrs' (name: cfg: let
+          configFile =
+            pkgs.writeText "config.json"
+            ''
+              alias=${name}
+              rgb=${cfg.rgb}
 
-          configFile = pkgs.writeText "config.json" 
-          ''
-            alias=${name}
-            rgb=${cfg.rgb}
+              network=${cfg.network}
+              # log-file=${cfg.workingDirectory}/lightning.log
+              log-level=debug
 
-            network=${cfg.network}
-            # log-file=${cfg.workingDirectory}/lightning.log
-            log-level=debug
+              fee-base=1000
+              fee-per-satoshi=10
+              min-capacity-sat=1000000
 
-            fee-base=1000
-            fee-per-satoshi=10
-            min-capacity-sat=1000000
+              large-channels
+              funding-confirms=2
+              # autocleaninvoice-cycle=86400
+              # autocleaninvoice-expired-by=86400
 
-            large-channels
-            funding-confirms=2
-            # autocleaninvoice-cycle=86400
-            # autocleaninvoice-expired-by=86400
+              bind-addr=0.0.0.0:${toString cfg.port}
 
-            bind-addr=0.0.0.0:${toString cfg.port}
-
-            bitcoin-cli=/run/current-system/sw/bin/bitcoin-cli
-            bitcoin-rpcconnect=bitcoin-signet
-            bitcoin-rpcport=38332
-            bitcoin-rpcuser=lightning
-            bitcoin-rpcpassword=7fM3AEwFw-5iP7LQ917q-__4AKK9DWTwh3hpNIQjTAw
-          '';
-  
+              bitcoin-cli=/run/current-system/sw/bin/bitcoin-cli
+              bitcoin-rpcconnect=bitcoin-signet
+              bitcoin-rpcport=38332
+              bitcoin-rpcuser=lightning
+              bitcoin-rpcpassword=7fM3AEwFw-5iP7LQ917q-__4AKK9DWTwh3hpNIQjTAw
+            '';
         in {
           name = "lightning@${name}";
           value = {
