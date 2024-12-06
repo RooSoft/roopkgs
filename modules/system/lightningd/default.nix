@@ -46,25 +46,6 @@
   config = let
     filteredCfgs = lib.attrsets.filterAttrs (_: cfg: cfg.enable) config.roopkgs.system.lightningd;
   in {
-    # users = {
-    #   groups =
-    #     lib.attrsets.mapAttrs' (name: cfg: {
-    #       name = "lightning-${name}";
-    #       value = {};
-    #     })
-    #     filteredCfgs;
-
-    #   users =
-    #     lib.attrsets.mapAttrs' (name: cfg: {
-    #       name = "lightning-${name}";
-    #       value = {
-    #         isSystemUser = true;
-    #         group = "lightning-${name}";
-    #       };
-    #     })
-    #     filteredCfgs;
-    # };
-
     systemd = {
       tmpfiles =
         lib.attrsets.mapAttrs' (name: cfg: {
@@ -84,7 +65,6 @@
               rgb=${cfg.rgb}
 
               network=${cfg.network}
-              # log-file=${cfg.workingDirectory}/lightning.log
               log-level=debug
 
               fee-base=1000
