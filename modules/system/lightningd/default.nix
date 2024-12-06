@@ -13,6 +13,10 @@
 
           package = mkPackageOption pkgs "clightning" {};
 
+          user = mkOption {
+            type = types.str;
+          };
+
           network = mkOption {
             type = types.enum ["mainnet" "signet"];
             default = "mainnet";
@@ -42,31 +46,31 @@
   config = let
     filteredCfgs = lib.attrsets.filterAttrs (_: cfg: cfg.enable) config.roopkgs.system.lightningd;
   in {
-    users = {
-      groups =
-        lib.attrsets.mapAttrs' (name: cfg: {
-          name = "lightning-${name}";
-          value = {};
-        })
-        filteredCfgs;
+    # users = {
+    #   groups =
+    #     lib.attrsets.mapAttrs' (name: cfg: {
+    #       name = "lightning-${name}";
+    #       value = {};
+    #     })
+    #     filteredCfgs;
 
-      users =
-        lib.attrsets.mapAttrs' (name: cfg: {
-          name = "lightning-${name}";
-          value = {
-            isSystemUser = true;
-            group = "lightning-${name}";
-          };
-        })
-        filteredCfgs;
-    };
+    #   users =
+    #     lib.attrsets.mapAttrs' (name: cfg: {
+    #       name = "lightning-${name}";
+    #       value = {
+    #         isSystemUser = true;
+    #         group = "lightning-${name}";
+    #       };
+    #     })
+    #     filteredCfgs;
+    # };
 
     systemd = {
       tmpfiles =
         lib.attrsets.mapAttrs' (name: cfg: {
           name = "rules";
           value = [
-            "d ${cfg.workingDirectory} 750 lightning-${name} lightning-${name}"
+            "d ${cfg.workingDirectory} 750 ${cfg.user} lightning-${cfg.user}"
           ];
         })
         filteredCfgs;
@@ -107,7 +111,7 @@
             wants = ["network-online.target"];
 
             serviceConfig = {
-              User = "lightning-${name}";
+              User = cfg.user;
               ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory}'';
 
               WorkingDirectory = cfg.workingDirectory;
