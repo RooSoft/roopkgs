@@ -69,7 +69,7 @@
 
               fee-base=1000
               fee-per-satoshi=10
-              min-capacity-sat=1000000
+              min-capacity-sat=10000
 
               large-channels
               funding-confirms=2
