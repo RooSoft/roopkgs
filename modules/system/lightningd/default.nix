@@ -71,6 +71,9 @@
               fee-per-satoshi=10
               min-capacity-sat=10000
 
+              # for bolt 12
+              enable-experimental-offers
+
               large-channels
               funding-confirms=2
               # autocleaninvoice-cycle=86400
