@@ -71,9 +71,6 @@
               fee-per-satoshi=10
               min-capacity-sat=10000
 
-              # for bolt 12
-              enable-experimental-offers
-
               large-channels
               funding-confirms=2
               # autocleaninvoice-cycle=86400
@@ -95,7 +92,7 @@
 
             serviceConfig = {
               User = cfg.user;
-              ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory}'';
+              ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory} --enable-experimental-offers'';
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
