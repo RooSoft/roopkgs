@@ -92,7 +92,7 @@
 
             serviceConfig = {
               User = cfg.user;
-              ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory} --enable-experimental-features'';
+              ExecStart = ''${cfg.package}/bin/lightningd --conf ${configFile} --lightning-dir ${cfg.workingDirectory}'';
 
               WorkingDirectory = cfg.workingDirectory;
               Type = "simple";
