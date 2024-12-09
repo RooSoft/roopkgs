@@ -72,6 +72,7 @@
               min-capacity-sat=10000
 
               large-channels
+              experimental-offers
               funding-confirms=2
               # autocleaninvoice-cycle=86400
               # autocleaninvoice-expired-by=86400
