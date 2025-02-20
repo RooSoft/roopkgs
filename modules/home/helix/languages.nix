@@ -17,7 +17,7 @@
         file-types = ["ex" "exs"];
         roots = ["mix.exs"];
         auto-format = true;
-        diagnostic-severity = "Hint";
+        diagnostic-severity = "hint";
         comment-token = "#";
         indent = {
           tab-width = 2;
