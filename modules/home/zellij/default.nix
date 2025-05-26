@@ -28,6 +28,8 @@ in {
         simplified_ui = false;
         pane_frames = false;
 
+        show_startup_tips = false;
+
         scroll_buffer_size = 10000;
       };
     };
