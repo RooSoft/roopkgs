@@ -10,7 +10,7 @@ in {
 
   config = lib.mkIf zshCfg.enable {
     programs.zsh = {
-      initExtra = ''
+      initContent = ''
         eval "$(zoxide init zsh)"
       '';
     };

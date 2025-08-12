@@ -10,7 +10,7 @@ in {
 
   config = lib.mkIf zshCfg.enable {
     programs.zsh = {
-      initExtra = ''
+      initContent = ''
         source <(fzf --zsh)
       '';
     };

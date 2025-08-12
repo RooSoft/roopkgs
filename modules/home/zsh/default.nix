@@ -31,7 +31,7 @@ in {
         EDITOR = "hx";
       };
 
-      initExtra = ''
+      initContent = ''
         # see https://superuser.com/a/169930/109556
         bindkey "\e[3~" delete-char
         bindkey "\e[F" forward-word
