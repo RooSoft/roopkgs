@@ -19,7 +19,8 @@ in {
       ];
 
       shellAliases = {
-        e = "eza -lg --git --git-repos";
+        e = "eza";
+        ee = "eza -lg --git --git-repos";
       };
     };
   };
