@@ -44,6 +44,13 @@
 
       keys = {
         normal = {
+          C-e = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
+            ":insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty"
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+          ];
           C-k = ["extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before"];
           C-j = ["extend_to_line_bounds" "delete_selection" "paste_after"];
           C-l = [":new" ":insert-output lazygit" ":buffer-close" ":redraw"];
