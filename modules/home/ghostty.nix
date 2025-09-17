@@ -7,6 +7,8 @@
 
   # see https://ghostty.org/docs/config
   ghosttyConfig = ''
+    # this file resides here: ~/.config/ghostty/config
+    
     font-family = "MesloLGM Nerd Font Mono Regular"
     font-size = 13
     font-thicken = true
