@@ -9,6 +9,7 @@
     ./zellij
     ./starship.nix
     ./alacritty.nix
+    ./ghostty.nix
     ./dust.nix
     ./bat.nix
   ];
