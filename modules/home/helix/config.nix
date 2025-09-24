@@ -57,9 +57,12 @@
             ":open %sh{cat /tmp/unique-file}"
             ":redraw"
           ];
-          C-k = ["extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before"];
-          C-j = ["extend_to_line_bounds" "delete_selection" "paste_after"];
+          C-k = ["extend_to_line_bounds" "delete_selection" "move_line_up" "paste_before" ":format"];
+          C-j = ["extend_to_line_bounds" "delete_selection" "paste_after" ":format"];
           C-l = [":new" ":insert-output lazygit" ":buffer-close" ":redraw"];
+
+          # macro for nix files, splitting chains into attribute sets
+          C-m = "@i = {<ret><down><backspace>;<ret><esc>mae<C-k>:format<ret>";
         };
         insert = {
           j = {k = "normal_mode";};
