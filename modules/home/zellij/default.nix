@@ -35,9 +35,9 @@ in {
         keybinds = {
           normal = {
             unbind = [
-              "Alt up"    # helix - Expand selection to parent syntax node            
-              "Alt down"  # helix - Shrink syntax tree object selection
-              "Alt left"  # helix - Select previous sibling node in syntax tree
+              "Alt up" # helix - Expand selection to parent syntax node
+              "Alt down" # helix - Shrink syntax tree object selection
+              "Alt left" # helix - Select previous sibling node in syntax tree
               "Alt right" # heilx - Select next sibling node in syntax tree
             ];
           };
