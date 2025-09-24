@@ -38,6 +38,7 @@
         };
 
         statusline = {
+          center = ["version-control"];
           right = ["diagnostics" "position" "position-percentage" "file-encoding" "file-type"];
         };
       };
