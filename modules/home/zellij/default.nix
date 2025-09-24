@@ -39,6 +39,9 @@ in {
               "Alt down" # helix - Shrink syntax tree object selection
               "Alt left" # helix - Select previous sibling node in syntax tree
               "Alt right" # heilx - Select next sibling node in syntax tree
+              "Shift Alt down" # helix - Select all children nodes in syntax tree
+              "Alt *" # helix - Use current selection as the search pattern
+              "Alt x" # helix - Shrink selection to line bounds
             ];
           };
         };
