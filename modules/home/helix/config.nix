@@ -41,6 +41,10 @@
           center = ["version-control"];
           right = ["diagnostics" "position" "position-percentage" "file-encoding" "file-type"];
         };
+
+        inline-diagnostics = {
+          cursor-line = "hint";
+        };
       };
 
       keys = {
