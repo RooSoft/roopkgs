@@ -31,6 +31,7 @@
         formatter = {
           command = "alejandra";
         };
+        language-servers = ["nixd"];
       }
 
       {
@@ -46,5 +47,11 @@
   tomlFormat = (pkgs.formats.toml {}).generate "something" languageConfig;
 in
   lib.mkIf cfg.enable {
+    home = {
+      packages = [
+        pkgs.nixd
+      ];
+    };
+
     home.file.".config/helix/languages.toml".source = tomlFormat;
   }
