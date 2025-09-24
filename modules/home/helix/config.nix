@@ -44,6 +44,7 @@
 
         inline-diagnostics = {
           cursor-line = "hint";
+          other-lines = "error";
         };
       };
 
