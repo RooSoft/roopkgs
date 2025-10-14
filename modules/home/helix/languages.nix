@@ -50,6 +50,8 @@ in
     home = {
       packages = [
         pkgs.nixd
+
+        pkgs.beamMinimal27Packages.elixir-ls
       ];
     };
 
