@@ -51,7 +51,7 @@ in
       packages = [
         pkgs.nixd
 
-        pkgs.beamMinimal27Packages.elixir-ls
+        pkgs.beamMinimal28Packages.elixir-ls
       ];
     };
 
