@@ -3,5 +3,6 @@
     ./kes.nix
     ./minio
     ./lightningd
+    ./helix
   ];
 }
