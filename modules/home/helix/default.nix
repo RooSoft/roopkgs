@@ -6,10 +6,16 @@
   ...
 }: let
   cfg = config.roopkgs.home.helix;
-  helix = import ../../common/helix {inherit pkgs unstable;};
+  helix = import ../../common/helix {
+    inherit pkgs unstable;
+    withMarksman = cfg.marksman.enable;
+  };
 in {
   options = with lib; {
     roopkgs.home.helix.enable = mkEnableOption "helix";
+    roopkgs.home.helix.marksman.enable =
+      mkEnableOption "the marksman markdown LSP (needs .NET to build)"
+      // {default = true;};
   };
 
   imports = [

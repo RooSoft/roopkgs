@@ -1,5 +1,6 @@
-{
+args @ {
   pkgs,
   unstable,
+  withMarksman ? true,
 }:
-  import ./lib.nix {inherit pkgs unstable;}
+import ./lib.nix args
