@@ -1,9 +1,11 @@
 {
   lib,
   pkgs,
+  config,
   unstable,
   ...
 }: let
+  cfg = config.roopkgs.home.helix;
   helix = import ../../common/helix {inherit pkgs unstable;};
 in {
   options = with lib; {
@@ -15,9 +17,9 @@ in {
     ./languages.nix
   ];
 
-  config = {
-    home = {
-      packages = helix.packages;
-    };
+  # Only install helix and its LSPs when enabled. Unconditional install
+  # pulled marksman (and a from-source .NET build) onto every machine.
+  config = lib.mkIf cfg.enable {
+    home.packages = helix.packages;
   };
 }
